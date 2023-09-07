@@ -56,10 +56,18 @@ stages:
     - task: AzureContainerApps@1
       displayName: Deploy new container version
       inputs:
-        azureSubscription: 'azure-connection'
+        azureSubscription: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)'
         imageToDeploy: '$(IMAGE_NAME):$(TAG)'
         containerAppName: '$(CONTAINERAPPS_APP)'
         resourceGroup: '$(RESOURCE_GROUP)'
-        containerAppEnvironment: '$(CONTAINERAPPS_ENVIRONMENT)'
+        containerAppEnvironment: '- task: AzureContainerApps@1
+  inputs:
+    azureSubscription: 'Azure subscription 1(bc7c051a-c439-4898-b227-d199d6240d8e)'
+    imageToDeploy: '$(IMAGE_NAME):$(TAG)'
+    containerAppName: '$(CONTAINERAPPS_APP)'
+    resourceGroup: '$(RESOURCE_GROUP)'
+    containerAppEnvironment: '$(CONTAINERAPPS_ENVIRONMENT)'
+    targetPort: '3500'
+    ingress: 'external''
         targetPort: '3500'
         ingress: 'external'
